@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.DataTransferObject;
 using Entities.Exceptions;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
@@ -44,9 +45,9 @@ namespace Presentation.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult UpdateBook([FromRoute(Name = "id")] int id, [FromBody] Book book)
+        public IActionResult UpdateBook([FromRoute(Name = "id")] int id, [FromBody] BookDtoForUpdate bookDto)
         {   
-            _manager.BookService.UpdateOneBook(book, id, false);
+            _manager.BookService.UpdateOneBook(bookDto, id, false);
             return NoContent();
         }
 
@@ -63,7 +64,7 @@ namespace Presentation.Controllers
             var entity = _manager.BookService.GetOneBookById(id, true);
 
             bookPatch.ApplyTo(entity);
-            _manager.BookService.UpdateOneBook(entity, id, true);
+            _manager.BookService.UpdateOneBook(new BookDtoForUpdate (entity.Id,entity.Title,entity.Price) , id, true);
             return NoContent();
         }
     }
