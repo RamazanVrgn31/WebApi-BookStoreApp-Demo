@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using Services.Contrats;
@@ -19,6 +20,13 @@ builder.Services.AddControllers(config =>
  .AddXmlDataContractSerializerFormatters()
  .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly)
  .AddNewtonsoftJson();
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+    
+});
+
 builder.Services.AddSwaggerGen();
 
 
