@@ -8,10 +8,12 @@ using Entities.Exceptions;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.ActionFilters;
 using Services.Contrats;
 
 namespace Presentation.Controllers
 {
+    [ServiceFilter(typeof(LogFilterAttribute))]
     [ApiController]
     [Route("api/books")]
     public class BooksController : ControllerBase
@@ -26,38 +28,32 @@ namespace Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllBooksAsync()
         {
-                var books = await _manager.BookService.GetAllBooksAsync(false);
-                return Ok(books);
+            var books = await _manager.BookService.GetAllBooksAsync(false);
+            return Ok(books);
         }
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetBookByIdAsync([FromRoute(Name = "id")] int id)
-        { 
-                var book = await _manager.BookService.GetOneBookByIdAsync(id, false);  
-                return Ok(book);
+        {
+            var book = await _manager.BookService.GetOneBookByIdAsync(id, false);
+            return Ok(book);
         }
 
+
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost]
         public async Task<IActionResult> CreateBookAsync([FromBody] BookDtoForInsertion bookDto)
         {
-            if (bookDto is null)
-                return BadRequest();
-
-            if (!ModelState.IsValid)
-                return UnprocessableEntity(ModelState);
 
             var book=await _manager.BookService.CreateOneBookAsync(bookDto);
             return StatusCode(201, book);
         }
 
+
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateBookAsync([FromRoute(Name = "id")] int id, [FromBody] BookDtoForUpdate bookDto)
         {
-            if (bookDto is null)
-                return BadRequest(); // 400
-
-            if (!ModelState.IsValid)
-                return UnprocessableEntity(ModelState); // 422
 
            await _manager.BookService.UpdateOneBookAsync(bookDto, id, false);
             return NoContent(); //204

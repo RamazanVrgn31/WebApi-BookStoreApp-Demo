@@ -124,3 +124,21 @@
 2025-04-06 20:25:46.3253 Info Configuration initialized.
 2025-04-06 20:29:33.3940 Info AppDomain Shutting down. LogFactory closing...
 2025-04-06 20:29:33.3940 Info LogFactory has been closed.
+2025-04-06 21:01:58.0446 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-06 21:01:58.0613 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-06 21:01:58.0715 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\Yazılım\WebApiCourse\bsStoreApp\WebApi\nlog.config
+2025-04-06 21:01:58.0848 Info Configuration initialized.
+2025-04-06 21:06:19.0017 Info AppDomain Shutting down. LogFactory closing...
+2025-04-06 21:06:19.0084 Info LogFactory has been closed.
+2025-04-06 21:32:44.2839 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-06 21:32:44.2957 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-06 21:32:44.3054 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\Yazılım\WebApiCourse\bsStoreApp\WebApi\nlog.config
+2025-04-06 21:32:44.3054 Info Configuration initialized.
+2025-04-06 21:33:27.1380 Info AppDomain Shutting down. LogFactory closing...
+2025-04-06 21:33:27.1469 Info LogFactory has been closed.
+2025-04-06 21:46:29.3355 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-06 21:46:29.3493 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-06 21:46:29.3493 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\Yazılım\WebApiCourse\bsStoreApp\WebApi\nlog.config
+2025-04-06 21:46:29.3722 Info Configuration initialized.
+2025-04-06 21:47:42.4811 Info AppDomain Shutting down. LogFactory closing...
+2025-04-06 21:47:42.4890 Info LogFactory has been closed.
