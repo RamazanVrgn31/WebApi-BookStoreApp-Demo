@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Contrats;
 
 namespace Repositories.EfCore
@@ -19,9 +20,9 @@ namespace Repositories.EfCore
 
         public void DeleteOneBook(Book book) => Delete(book);
 
-        public IQueryable<Book> GetAllBooks(bool trackChanges) => FindAll(trackChanges);
-        public Book GetOneBookById(int id, bool trackChanges) =>
-            FindByCondition(b => b.Id.Equals(id), trackChanges).SingleOrDefault();
+        public async  Task<IEnumerable<Book>> GetAllBooksAsync(bool trackChanges) => await FindAll(trackChanges).ToListAsync();
+        public async Task<Book> GetOneBookByIdAsync(int id, bool trackChanges) =>
+            await FindByCondition(b => b.Id.Equals(id), trackChanges).SingleOrDefaultAsync();
 
     }
 }
