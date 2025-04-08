@@ -7,6 +7,7 @@ using AutoMapper;
 using Entities.DataTransferObject;
 using Entities.Exceptions;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Repositories.Contrats;
 using Services.Contrats;
 
@@ -48,10 +49,12 @@ namespace Services.Concrete
 
         }
 
-        public async Task<IEnumerable<BookDto>> GetAllBooksAsync(bool trackChanges)
+        public async Task<(IEnumerable<BookDto> books, MetaData metadata)> GetAllBooksAsync(BookParameters bookParameters ,bool trackChanges)
         {
-            var books = await _manager.Book.GetAllBooksAsync(trackChanges);
-            return _mapper.Map<IEnumerable<BookDto>>(books);
+            var booksWithMetadata = await _manager.Book.GetAllBooksAsync(bookParameters , trackChanges);
+             var booksDto = _mapper.Map<IEnumerable<BookDto>>(booksWithMetadata);
+
+            return(booksDto, booksWithMetadata.MetaData);
         }
 
         public async Task<(BookDtoForUpdate bookDtoForUpdate, Book book)> GetBookForPatchAsync(int id, bool trackChanges)

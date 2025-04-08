@@ -142,3 +142,21 @@
 2025-04-06 21:46:29.3722 Info Configuration initialized.
 2025-04-06 21:47:42.4811 Info AppDomain Shutting down. LogFactory closing...
 2025-04-06 21:47:42.4890 Info LogFactory has been closed.
+2025-04-08 18:08:27.0307 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-08 18:08:27.0942 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-08 18:08:27.1304 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\Yazılım\WebApiCourse\bsStoreApp\WebApi\nlog.config
+2025-04-08 18:08:27.1589 Info Configuration initialized.
+2025-04-08 18:13:32.5828 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-08 18:13:32.6033 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-08 18:13:32.6166 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\Yazılım\WebApiCourse\bsStoreApp\WebApi\nlog.config
+2025-04-08 18:13:32.6311 Info Configuration initialized.
+2025-04-08 19:52:43.1635 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-08 19:52:43.1917 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-08 19:52:43.2029 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\Yazılım\WebApiCourse\bsStoreApp\WebApi\nlog.config
+2025-04-08 19:52:43.2234 Info Configuration initialized.
+2025-04-08 20:10:49.5253 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-08 20:10:49.5380 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-08 20:10:49.5380 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\Yazılım\WebApiCourse\bsStoreApp\WebApi\nlog.config
+2025-04-08 20:10:49.5554 Info Configuration initialized.
+2025-04-08 20:11:23.9913 Info AppDomain Shutting down. LogFactory closing...
+2025-04-08 20:11:23.9913 Info LogFactory has been closed.
