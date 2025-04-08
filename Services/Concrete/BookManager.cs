@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -51,6 +52,9 @@ namespace Services.Concrete
 
         public async Task<(IEnumerable<BookDto> books, MetaData metadata)> GetAllBooksAsync(BookParameters bookParameters ,bool trackChanges)
         {
+            if (!bookParameters.ValidPriceRange)
+                throw new PriceOutOfRangeBadRequestException();
+
             var booksWithMetadata = await _manager.Book.GetAllBooksAsync(bookParameters , trackChanges);
              var booksDto = _mapper.Map<IEnumerable<BookDto>>(booksWithMetadata);
 
