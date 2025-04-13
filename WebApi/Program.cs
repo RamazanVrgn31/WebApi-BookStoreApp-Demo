@@ -40,6 +40,7 @@ builder.Services.ConfigureLoggerManager();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.ConfigureActionFilters(); //IOC for Action Filters
 builder.Services.ConfigureCors();
+builder.Services.ConfigureDataShaper();
 
 
 var app = builder.Build();
