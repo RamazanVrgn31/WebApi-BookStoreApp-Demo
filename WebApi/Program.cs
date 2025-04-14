@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using Presentation.ActionFilters;
+using Services.Concrete;
 using Services.Contrats;
 using WebApi.Extensions;
 
@@ -17,10 +18,10 @@ builder.Services.AddControllers(config =>
     config.RespectBrowserAcceptHeader = true; // false by default
     config.ReturnHttpNotAcceptable = true; // false by default
 })
- .AddCustomCsvFormatter() 
  .AddXmlDataContractSerializerFormatters()
- .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly)
- .AddNewtonsoftJson();
+ .AddCustomCsvFormatter()
+ .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
+ //.AddNewtonsoftJson();
 
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
@@ -41,6 +42,8 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.ConfigureActionFilters(); //IOC for Action Filters
 builder.Services.ConfigureCors();
 builder.Services.ConfigureDataShaper();
+builder.Services.AddCustomMediaTypes(); //Custom Media Types
+builder.Services.AddScoped<IBookLinks, BookLinks>();
 
 
 var app = builder.Build();

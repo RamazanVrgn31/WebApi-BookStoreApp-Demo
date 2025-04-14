@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities.DataTransferObject;
+using Entities.LinkModels;
 using Entities.Models;
 using Entities.RequestFeatures;
 
@@ -12,7 +13,7 @@ namespace Services.Contrats
 {
      public interface IBookService
     {
-        Task<(IEnumerable<ExpandoObject> books,MetaData metadata)> GetAllBooksAsync(BookParameters bookParameter, bool trackChanges);
+        Task<(LinkResponse linkResponse, MetaData metadata)> GetAllBooksAsync(LinkParameters linkParameters, bool trackChanges);
         Task<BookDto> GetOneBookByIdAsync(int id, bool trackChanges);
         Task<BookDto> CreateOneBookAsync(BookDtoForInsertion book);
         Task DeleteOneBookAsync(int id, bool trackChanges);
