@@ -1,8 +1,10 @@
 ﻿using Entities.DataTransferObject;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Presentation.ActionFilters;
+using Presentation.Controllers;
 using Repositories.Contrats;
 using Repositories.EfCore;
 using Services.Concrete;
@@ -75,6 +77,20 @@ namespace WebApi.Extensions
                     xmlOutputFormatter.SupportedMediaTypes.Add("application/vnd.vrgn.hateoas+xml");
                     xmlOutputFormatter.SupportedMediaTypes.Add("application/vnd.vrgn.apiroot+xml");
                 }
+            });
+        }
+
+        public static void ConfigureVersioning(this IServiceCollection services)
+        {
+            services.AddApiVersioning(options =>
+            {
+                options.ReportApiVersions = true;
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.ApiVersionReader = new HeaderApiVersionReader("api-version");
+
+                options.Conventions.Controller<BooksController>().HasApiVersion(new ApiVersion(1, 0));
+                options.Conventions.Controller<BookV2Controller>().HasDeprecatedApiVersion(new ApiVersion(2, 0));
             });
         }
     }

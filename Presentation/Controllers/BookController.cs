@@ -15,9 +15,13 @@ using Services.Contrats;
 
 namespace Presentation.Controllers
 {
+    //[ApiVersion("1.0")]
+    //Api versioning Convention
+
     [ServiceFilter(typeof(LogFilterAttribute))]
     [ApiController]
-    [Route("api/books")]
+    //[Route("api/{v:apiversion}/books")] //URL versioning
+    [Route("api/books")] // Header versioning
     public class BooksController : ControllerBase
     {
         private readonly IServiceManager _manager;
