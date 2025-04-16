@@ -62,6 +62,8 @@ namespace WebApi.Extensions
                 if (systemTextJsonOutputFormatter is not null)
                 {
                     systemTextJsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.vrgn.hateoas+json");
+
+                    systemTextJsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.vrgn.apiroot+json");
                 }
 
                 var xmlOutputFormatter = config
@@ -71,6 +73,7 @@ namespace WebApi.Extensions
                 if (xmlOutputFormatter is not null)
                 {
                     xmlOutputFormatter.SupportedMediaTypes.Add("application/vnd.vrgn.hateoas+xml");
+                    xmlOutputFormatter.SupportedMediaTypes.Add("application/vnd.vrgn.apiroot+xml");
                 }
             });
         }
