@@ -1,4 +1,5 @@
-﻿using Entities.DataTransferObject;
+﻿using AspNetCoreRateLimit;
+using Entities.DataTransferObject;
 using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -107,5 +108,26 @@ namespace WebApi.Extensions
             {
                 validationOpt.MustRevalidate = false;
             }); //Validation Cache with ServiceCollection
+
+        public static void ConfigureRateLimitingOptions(this IServiceCollection services) 
+        { 
+            var rateLimitRules = new List<RateLimitRule>{ new RateLimitRule
+            {
+                Limit = 3,
+                Period = "1m",
+                Endpoint = "*",
+
+            } };
+
+            services.Configure<IpRateLimitOptions>(options =>
+            {
+                options.GeneralRules = rateLimitRules;
+            });
+
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+        }
     }
 }
