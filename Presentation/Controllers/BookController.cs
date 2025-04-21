@@ -9,6 +9,7 @@ using Entities.Exceptions;
 using Entities.Models;
 using Entities.RequestFeatures;
 using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client.Cache;
@@ -34,7 +35,8 @@ namespace Presentation.Controllers
         {
             _manager = manager;
         }
-
+        
+        [Authorize]
         [HttpHead]
         [HttpGet(Name = "GetAllBooksAsync")]
         [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
@@ -54,6 +56,7 @@ namespace Presentation.Controllers
                 Ok(result.linkResponse.ShapedEntities);
         }
 
+        [Authorize]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetBookByIdAsync([FromRoute(Name = "id")] int id)
         {
@@ -62,6 +65,7 @@ namespace Presentation.Controllers
         }
 
 
+        [Authorize(Roles="Admin,Editor")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost(Name = "CreateBookAsync")]
         public async Task<IActionResult> CreateBookAsync([FromBody] BookDtoForInsertion bookDto)
@@ -72,6 +76,7 @@ namespace Presentation.Controllers
         }
 
 
+        [Authorize(Roles = "Admin,Editor")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateBookAsync([FromRoute(Name = "id")] int id, [FromBody] BookDtoForUpdate bookDto)
@@ -81,6 +86,7 @@ namespace Presentation.Controllers
             return NoContent(); //204
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteBookAsync([FromRoute(Name = "id")] int id)
         {
@@ -88,6 +94,7 @@ namespace Presentation.Controllers
                 return NoContent();
         }
 
+        [Authorize]
         [HttpPatch("{id:int}")]
         public async Task<IActionResult> PartialyUpdateBookAsync([FromRoute(Name = "id")] int id, [FromBody] JsonPatchDocument<BookDtoForUpdate> bookPatch)
         {
@@ -106,6 +113,7 @@ namespace Presentation.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpOptions]
         public  IActionResult GetBooksOptions()
         {
