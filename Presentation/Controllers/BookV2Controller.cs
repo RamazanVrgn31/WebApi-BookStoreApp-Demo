@@ -13,6 +13,8 @@ namespace Presentation.Controllers
     [ApiController]
     //[Route("api/{v:apiversion}/books")] //URL versioning
     [Route("api/books")]
+    [ApiExplorerSettings(GroupName = "v2")]
+
 
     public class BookV2Controller :ControllerBase
     {

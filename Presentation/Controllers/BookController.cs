@@ -25,6 +25,8 @@ namespace Presentation.Controllers
     [ApiController]
     //[Route("api/{v:apiversion}/books")] //URL versioning
     [Route("api/books")] // Header versioning
+    [ApiExplorerSettings(GroupName = "v1")]
+
     //[ResponseCache(CacheProfileName = "5mins")]  //Expriration Cache with CacheProfile
     //[HttpCacheExpiration(CacheLocation = CacheLocation.Public , MaxAge =90)] //Validation Cache with Attribute
     public class BooksController : ControllerBase

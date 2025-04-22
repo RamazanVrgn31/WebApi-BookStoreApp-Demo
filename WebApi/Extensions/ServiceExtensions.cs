@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Presentation.ActionFilters;
 using Presentation.Controllers;
 using Repositories.Contrats;
@@ -171,6 +172,50 @@ namespace WebApi.Extensions
                     IssuerSigningKey =  new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
 
                 };
+            });
+        }
+
+        public static void ConfigureSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new OpenApiInfo { 
+                    Title = "BOOK API V1",
+                    Version = "v1",
+                    Description = "BTK Akademi Asp.Net Core Web API V1",
+                    TermsOfService = new Uri("https://github.com/RamazanVrgn31"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Ramazan V.",
+                        Email = "RamazanV@gmail.com",
+                        Url = new Uri("https://github.com/RamazanVrgn31")
+                    }
+                });
+                s.SwaggerDoc("v2", new OpenApiInfo { Title = "VRGN API V2", Version = "v2" });
+              
+                s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Place to add JWT with Bearer.",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                s.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Name = "Bearer"
+                        },
+                       new List<string>()
+                    }
+                });
             });
         }
     }

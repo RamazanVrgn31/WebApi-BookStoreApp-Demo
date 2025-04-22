@@ -36,7 +36,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     
 });
 
-builder.Services.AddSwaggerGen();
+builder.Services.ConfigureSwagger();
 
 
 //Extension Method to configure the Sql Context
@@ -77,7 +77,10 @@ app.ConfigureExceptionHandler(logger);
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(s => {
+        s.SwaggerEndpoint("/swagger/v1/swagger.json", "Btk Akademi V1");
+        s.SwaggerEndpoint("/swagger/v2/swagger.json", "Btk Akademi V2");
+    });
 }
 
 if (app.Environment.IsProduction())
