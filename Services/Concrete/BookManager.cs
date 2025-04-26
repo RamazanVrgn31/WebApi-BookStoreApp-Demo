@@ -18,30 +18,44 @@ namespace Services.Concrete
 {
     public class BookManager : IBookService
     {
+        private readonly ICategoryService _categoryService;
         private readonly IRepositoryManager _manager;
         private readonly ILoggerService _logger;
         private readonly IMapper _mapper;
         private readonly IBookLinks _bookLinks;
 
-        public BookManager(IRepositoryManager manager, ILoggerService logger, IMapper mapper, IBookLinks bookLinks)
+        public BookManager(IRepositoryManager manager, ILoggerService logger, IMapper mapper, IBookLinks bookLinks, ICategoryService categoryService)
         {
             _manager = manager;
             _logger = logger;
             _mapper = mapper;
             _bookLinks = bookLinks;
+            _categoryService = categoryService;
         }
 
 
         public async Task<BookDto> CreateOneBookAsync(BookDtoForInsertion bookDto)
         {
+            var category = await _categoryService.GetOneCategoryByIdAsync(bookDto.CategoryId, trackChanges: false);
 
             var entity = _mapper.Map<Book>(bookDto);
+
             if (bookDto is null)
                 throw new ArgumentNullException(nameof(bookDto));
 
             _manager.Book.CreateOneBook(entity);
             await _manager.SaveAsync();
             return _mapper.Map<BookDto>(entity);
+        }
+        public async Task UpdateOneBookAsync(BookDtoForUpdate bookDto, int id, bool trackChanges)
+        {
+            //check entity 
+            var book = await GetOneBookByIdAndCheckExists(id, trackChanges);
+            //map entity to dto
+            book = _mapper.Map<Book>(bookDto);
+
+            _manager.Book.UpdateOneBook(book);
+            await _manager.SaveAsync();
         }
 
         public async Task DeleteOneBookAsync(int id, bool trackChanges)
@@ -87,22 +101,20 @@ namespace Services.Concrete
             return _mapper.Map<BookDto>(book);
         }
 
+        public async Task<IEnumerable<Book>> GetAllBooksWithDetailsAsync(bool trackChanges)
+        {
+            return await _manager
+                 .Book
+                 .GetAllBooksWithDetailsAsync(trackChanges);
+        }
+
         public async Task SaveChangesForUpdateAsync(BookDtoForUpdate bookDto, Book book)
         {
             _mapper.Map(bookDto, book);
             await _manager.SaveAsync();
         }
 
-        public async Task UpdateOneBookAsync(BookDtoForUpdate bookDto, int id, bool trackChanges)
-        {
-            //check entity 
-            var book = await GetOneBookByIdAndCheckExists(id, trackChanges);
-            //map entity to dto
-            book = _mapper.Map<Book>(bookDto);
-
-            _manager.Book.UpdateOneBook(book);
-            await _manager.SaveAsync();
-        }
+        
 
        
 
@@ -114,5 +126,7 @@ namespace Services.Concrete
                 throw new BookNotFoundException(id);
             return book;
         }
+
+        
     }
 }

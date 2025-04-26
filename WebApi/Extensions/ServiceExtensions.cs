@@ -218,5 +218,19 @@ namespace WebApi.Extensions
                 });
             });
         }
+
+        public static void RegisterRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IBookRepository, BookRepository>();
+    
+        }
+        public static void RegisterServices(this IServiceCollection services)
+        {
+            services.AddScoped<ICategoryService, CategoryManager>();
+            services.AddScoped<IBookService, BookManager>();
+            services.AddScoped<IAuthenticationService, AuthenticationManager>();
+
+        }
     }
 }

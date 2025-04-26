@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransferObject
 {
-    public class BookDto
+    public record BookDto
     {
         public int Id { get; init; }
         public String Title { get; init; }
